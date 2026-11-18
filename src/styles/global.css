@@ -1,0 +1,89 @@
+:root {
+	/* Fondos */
+	--bg-teal: #0c6480; /* hero y proyectos */
+	--bg-navy: #022735; /* sobre mí, contacto y tarjetas */
+	--bg-slate: #275868; /* habilidades */
+	--bg-dark: #111111; /* navbar y tarjeta de GitHub */
+	--bg-footer: #011b25;
+
+	/* Textos y acentos */
+	--white: #ffffff;
+	--accent: #79cff1; /* subtítulos, destacados y botones */
+	--text: #ffffffdb; /* párrafos (blanco 86%) */
+	--muted: #b8bcc8; /* navbar, footer y texto secundario */
+	--line: #79cff138; /* bordes y separadores (acento 22%) */
+
+	/* Layout: el diseño (Figma 1920px) ocupa 1144px centrados.
+	   - Hasta 1920px: 1144px fijos (o el ancho disponible menos 2rem).
+	   - Más de 1920px: crece proporcional (1144 / 1920 = 59.58vw). */
+	--content-width: max(min(1144px, 100% - 2rem), 59.5833vw);
+
+	/* Unidad de diseño: 1px del Figma (frame 1920px).
+	   Vale 1px hasta 1920px de pantalla y crece proporcional después.
+	   Uso: calc(76 * var(--u)) */
+	--u: max(1px, 0.052083vw);
+
+	/* Tipografía (definida en astro.config.mjs) */
+	--font-body: var(--font-poppins);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	background: var(--bg-teal);
+	color: var(--white);
+	font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+p {
+	margin: 0;
+}
+
+ul,
+dl,
+dd {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* Las secciones quedan debajo del header fijo al navegar con los links */
+section {
+	scroll-margin-top: calc(78 * var(--u));
+}
+
+/* Contenedor centrado */
+.wrap {
+	width: var(--content-width);
+	margin-inline: auto;
+}
+
+/* Subtítulo chico en mayúsculas que abre cada sección */
+.eyebrow {
+	font-size: calc(12 * var(--u));
+	font-weight: 700;
+	line-height: calc(20 * var(--u));
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--accent);
+}
+
+/* Título grande de sección: blanco con una parte destacada en <span> */
+.section-title {
+	margin-top: calc(19 * var(--u));
+	font-size: min(calc(64 * var(--u)), 11vw);
+	font-weight: 800;
+	line-height: 1;
+	letter-spacing: -0.01em;
+	text-transform: uppercase;
+}
+
+.section-title span {
+	color: var(--accent);
+}
