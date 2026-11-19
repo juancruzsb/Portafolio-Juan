@@ -1,0 +1,44 @@
+<footer>
+	<div class="wrap inner">
+		<a class="logo" href="#inicio" aria-label="Volver al inicio">JS</a>
+		<p>Juan Cruz Sabio · 2026</p>
+		<p class="made">Hecho con HTML y CSS</p>
+	</div>
+</footer>
+
+<style>
+	footer {
+		background: var(--bg-footer);
+	}
+
+	.inner {
+		display: flex;
+		align-items: center;
+		gap: calc(12 * var(--u));
+		min-height: calc(92 * var(--u));
+	}
+
+	.logo {
+		display: grid;
+		place-items: center;
+		flex: none;
+		width: calc(36 * var(--u));
+		height: calc(36 * var(--u));
+		border-radius: 50%;
+		background: var(--white);
+		color: var(--bg-dark);
+		font-size: calc(11 * var(--u));
+		font-weight: 800;
+		text-decoration: none;
+	}
+
+	p {
+		font-size: calc(13 * var(--u));
+		color: var(--muted);
+	}
+
+	.made {
+		margin-left: auto;
+		text-align: right;
+	}
+</style>
