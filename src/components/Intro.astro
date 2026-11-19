@@ -1,0 +1,346 @@
+---
+import { Image } from 'astro:assets';
+import foto from '../assets/intro/foto.png';
+import pokeort from '../assets/intro/pokeort 3d.png';
+import github from '../assets/intro/github.png';
+
+const skills = [
+	{ name: 'Frontend', color: 'var(--bg-navy)' },
+	{ name: 'Videojuegos', color: 'var(--bg-slate)' },
+	{ name: 'HTML y CSS', color: 'var(--accent)' },
+	{ name: 'JavaScript', color: 'var(--white)' },
+	{ name: 'Unity', color: '#868c9f' },
+];
+---
+
+<section id="inicio">
+	<div class="wrap">
+		<h1 class="title">
+			Portfolio <span class="bar">|</span> <span class="accent">Desarrollador de software</span>
+		</h1>
+
+		<div class="content">
+			<aside>
+				<p class="eyebrow">Juan Cruz Sabio</p>
+				<p class="bio">
+					Estudiante de la Escuela ORT, orientación TIC, y futuro ingeniero en Informática en la
+					UBA.
+				</p>
+				<p class="eyebrow">Lo que hago</p>
+				<ul class="skills">
+					{
+						skills.map((skill) => (
+							<li>
+								<span class="dot" style={`background:${skill.color}`} />
+								{skill.name}
+							</li>
+						))
+					}
+				</ul>
+				<a class="button primary" href="#proyectos">Ver proyectos</a>
+				<a class="button secondary" href="#contacto">Contacto</a>
+			</aside>
+
+			<div class="cards">
+				<div class="card photo">
+					<Image src={foto} alt="Foto de Juan Cruz Sabio" loading="eager" quality="max" />
+				</div>
+
+				<div class="card game">
+					<Image src={pokeort} alt="Combate en PokeORT 3D" loading="eager" quality="max" />
+					<span class="tag">PokeORT 3D</span>
+				</div>
+
+				<div class="card racing">
+					<p class="badge"><span>Hincha de</span> <strong>Racing</strong></p>
+				</div>
+
+				<div class="card next">
+					<p class="next-label">Lo que viene</p>
+					<p class="next-title">Ingeniería en<br />Informática</p>
+					<p class="next-place">UBA</p>
+				</div>
+
+				<a class="card github" href="https://github.com/juancruzsb">
+					<Image class="github-icon" src={github} alt="" loading="eager" />
+					<span class="github-name">GitHub</span>
+					<span class="github-user">github.com/juancruzsb</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	/* Figma: sección de 978px (96 arriba, 112 abajo) */
+	section {
+		padding-block: calc(96 * var(--u)) calc(112 * var(--u));
+		background: var(--bg-teal);
+	}
+
+	.title {
+		max-width: calc(1122 * var(--u));
+		font-size: min(calc(76 * var(--u)), 8.5vw);
+		font-weight: 800;
+		line-height: 1;
+		letter-spacing: -0.01em;
+		text-transform: uppercase;
+		overflow-wrap: anywhere;
+	}
+
+	.bar {
+		font-weight: 600;
+		color: var(--bg-navy);
+	}
+
+	.accent {
+		color: var(--accent);
+	}
+
+	.content {
+		display: grid;
+		grid-template-columns: calc(240 * var(--u)) 1fr;
+		column-gap: calc(48 * var(--u));
+		align-items: start;
+		margin-top: calc(52 * var(--u));
+	}
+
+	/* ---- Columna izquierda ---- */
+	aside {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.bio {
+		max-width: calc(226 * var(--u));
+		margin-block: calc(20 * var(--u)) calc(19 * var(--u));
+		font-size: calc(15 * var(--u));
+		line-height: 1.65; /* 24.75 / 15 */
+		color: var(--text);
+	}
+
+	.skills {
+		display: grid;
+		gap: calc(12 * var(--u));
+		margin-block: calc(18 * var(--u)) calc(24 * var(--u));
+	}
+
+	.skills li {
+		display: flex;
+		align-items: center;
+		gap: calc(14 * var(--u));
+		font-size: calc(15 * var(--u));
+		font-weight: 700;
+	}
+
+	.dot {
+		width: calc(40 * var(--u));
+		height: calc(40 * var(--u));
+		box-sizing: border-box;
+		border: calc(2 * var(--u)) solid #ffffff2e;
+		border-radius: 50%;
+	}
+
+	.button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		height: calc(44 * var(--u));
+		box-sizing: border-box;
+		border-radius: calc(12 * var(--u));
+		font-size: calc(14 * var(--u));
+		font-weight: 700;
+		text-decoration: none;
+		transition: filter 0.2s;
+	}
+
+	.button:hover {
+		filter: brightness(1.12);
+	}
+
+	.primary {
+		width: calc(139 * var(--u));
+		background: var(--accent);
+		color: var(--bg-navy);
+	}
+
+	.secondary {
+		width: calc(110 * var(--u));
+		margin-top: calc(10 * var(--u));
+		border: calc(2 * var(--u)) solid #ffffff59;
+		color: var(--white);
+	}
+
+	/* ---- Grilla de tarjetas: 276 | 276 | 276, con 14px entre ellas ---- */
+	.cards {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		grid-template-rows: calc(330 * var(--u)) calc(158 * var(--u));
+		gap: calc(14 * var(--u));
+	}
+
+	.card {
+		position: relative;
+		overflow: hidden;
+		box-sizing: border-box;
+		border: 1px solid var(--line);
+		border-radius: calc(14 * var(--u));
+		color: var(--white);
+		text-decoration: none;
+	}
+
+	.photo :global(img),
+	.game :global(img) {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.game {
+		grid-column: span 2;
+	}
+
+	.tag {
+		position: absolute;
+		top: calc(11 * var(--u));
+		left: calc(11 * var(--u));
+		padding: calc(5 * var(--u)) calc(11 * var(--u));
+		border-radius: 999px;
+		background: #022735db;
+		font-size: calc(12 * var(--u));
+		font-weight: 600;
+		line-height: calc(18 * var(--u));
+	}
+
+	.racing {
+		display: grid;
+		place-items: center;
+		background: repeating-linear-gradient(
+			90deg,
+			var(--white) 0 calc(22 * var(--u)),
+			var(--accent) calc(22 * var(--u)) calc(44 * var(--u))
+		);
+	}
+
+	.badge {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		width: calc(135 * var(--u));
+		height: calc(64 * var(--u));
+		border-radius: calc(12 * var(--u));
+		background: var(--bg-navy);
+		box-shadow: 0 calc(8 * var(--u)) calc(20 * var(--u)) #01141c59;
+		text-transform: uppercase;
+	}
+
+	.badge span {
+		font-size: calc(11 * var(--u));
+		font-weight: 700;
+		line-height: 1.4;
+		color: var(--accent);
+	}
+
+	.badge strong {
+		font-size: calc(26 * var(--u));
+		font-weight: 800;
+		line-height: 1.1;
+	}
+
+	.next,
+	.github {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		padding: calc(17 * var(--u));
+	}
+
+	.next {
+		background: var(--white);
+		color: var(--bg-navy);
+	}
+
+	.next-label,
+	.next-place {
+		font-size: calc(12 * var(--u));
+		font-weight: 700;
+		line-height: calc(18 * var(--u));
+	}
+
+	.next-label {
+		color: var(--bg-slate);
+	}
+
+	.next-title {
+		margin-top: calc(18 * var(--u));
+		font-size: calc(20 * var(--u));
+		font-weight: 800;
+		line-height: 1.15;
+		text-transform: uppercase;
+	}
+
+	.next-place {
+		margin-top: auto;
+	}
+
+	.github {
+		background: var(--bg-dark);
+	}
+
+	.github :global(.github-icon) {
+		width: calc(34 * var(--u));
+		height: calc(34 * var(--u));
+	}
+
+	.github-name {
+		margin-top: auto;
+		font-size: calc(16 * var(--u));
+		font-weight: 700;
+	}
+
+	.github-user {
+		max-width: 100%;
+		overflow-wrap: anywhere;
+		font-size: calc(13 * var(--u));
+		line-height: 1.65;
+		color: var(--muted);
+	}
+
+	/* ---- Pantallas más angostas ---- */
+	@media (max-width: 1180px) {
+		.content {
+			grid-template-columns: minmax(0, 1fr);
+			row-gap: calc(48 * var(--u));
+		}
+	}
+
+	@media (max-width: 700px) {
+		.cards {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			grid-template-rows: none;
+			grid-auto-rows: minmax(calc(158 * var(--u)), auto);
+		}
+
+		.photo,
+		.game,
+		.github {
+			grid-column: span 2;
+		}
+
+		.photo {
+			height: calc(360 * var(--u));
+		}
+
+		.game {
+			aspect-ratio: 564 / 328;
+		}
+
+		.next-title {
+			font-size: calc(15 * var(--u));
+		}
+	}
+</style>
