@@ -1,0 +1,90 @@
+---
+const facts = [
+	{ label: 'Escuela', value: 'ORT, orientación TIC' },
+	{ label: 'Futuro', value: 'Ingeniería en Informática, UBA' },
+	{ label: 'Me gusta', value: 'Programar, jugar y el fútbol' },
+	{ label: 'Hincha de', value: 'Racing Club' },
+];
+---
+
+<section id="sobre-mi">
+	<div class="wrap about">
+		<div>
+			<p class="eyebrow">Sobre mí</p>
+			<h2 class="section-title">Hola, soy<br /><span>Juan Cruz</span></h2>
+			<p class="bio">
+				Estudio en la Escuela ORT, en la orientación TIC, y voy a seguir Ingeniería en
+				Informática en la UBA. Me gusta programar, jugar a los videojuegos y ver fútbol. Y soy
+				hincha de Racing, que es muy importante.
+			</p>
+		</div>
+
+		<dl class="facts">
+			{
+				facts.map((fact) => (
+					<div class="fact">
+						<dt>{fact.label}</dt>
+						<dd>{fact.value}</dd>
+					</div>
+				))
+			}
+		</dl>
+	</div>
+</section>
+
+<style>
+	/* Figma: sección de 553px con 120px arriba y abajo */
+	section {
+		padding-block: calc(120 * var(--u));
+		background: var(--bg-navy);
+	}
+
+	.about {
+		display: grid;
+		grid-template-columns: calc(560 * var(--u)) calc(488 * var(--u));
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.bio {
+		margin-top: calc(18 * var(--u));
+		font-size: calc(20 * var(--u));
+		line-height: 1.6; /* 32 / 20 */
+	}
+
+	.facts {
+		border-top: 1px solid var(--line);
+	}
+
+	.fact {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: calc(16 * var(--u));
+		min-height: calc(59.4 * var(--u));
+		box-sizing: border-box;
+		border-bottom: 1px solid var(--line);
+	}
+
+	dt {
+		font-size: calc(12 * var(--u));
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+
+	dd {
+		font-size: calc(16 * var(--u));
+		font-weight: 700;
+		text-align: right;
+	}
+
+	/* ---- Pantallas más angostas ---- */
+	@media (max-width: 1180px) {
+		.about {
+			grid-template-columns: minmax(0, 1fr);
+			row-gap: calc(56 * var(--u));
+		}
+	}
+</style>

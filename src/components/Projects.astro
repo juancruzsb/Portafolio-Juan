@@ -1,0 +1,69 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import combate from '../assets/proyectos/pokeort combate.png';
+import inicio from '../assets/proyectos/pokeort inicio.png';
+import equipo from '../assets/proyectos/pokeort equipo.png';
+import combate3d from '../assets/proyectos/pokeort 3d combate.png';
+import pueblo from '../assets/proyectos/pokeort 3d pueblo.png';
+import dialogo from '../assets/proyectos/pokeort 3d dialogo.png';
+
+const projects = [
+	{
+		title: 'PokeORT',
+		description:
+			'Videojuego de combate por turnos basado en Pokémon, hecho con HTML, CSS y JavaScript.',
+		facts: [
+			{ label: 'Rol', value: 'Desarrollador frontend' },
+			{ label: 'Hecho con', value: 'HTML, CSS y JavaScript' },
+			{ label: 'Equipo', value: 'Jonas Leiserson y Liam Lutteral' },
+		],
+		images: [
+			{ src: combate, alt: 'Combate por turnos en PokeORT' },
+			{ src: inicio, alt: 'Pantalla de inicio de PokeORT' },
+			{ src: equipo, alt: 'Pantalla para elegir el equipo en PokeORT' },
+		],
+	},
+	{
+		title: 'PokeORT 3D',
+		description:
+			'Juego RPG de mundo semi-abierto basado en Pokémon Escarlata y Púrpura, la última entrega de la saga en ese momento.',
+		facts: [
+			{ label: 'Rol', value: 'Game developer' },
+			{ label: 'Hecho con', value: 'Unity' },
+			{ label: 'Equipo', value: 'Noah Marabi, Facundo Pirolo y Jonas Leiserson', stacked: true },
+		],
+		images: [
+			{ src: combate3d, alt: 'Combate en PokeORT 3D' },
+			{ src: pueblo, alt: 'Pueblo de PokeORT 3D' },
+			{ src: dialogo, alt: 'Diálogo con el Prof. Darin en PokeORT 3D' },
+		],
+		reverse: true,
+	},
+];
+---
+
+<section id="proyectos">
+	<div class="wrap">
+		<p class="eyebrow">Proyectos</p>
+		<h2 class="section-title">Mis <span>proyectos</span></h2>
+
+		<div class="list">
+			{projects.map((project) => <ProjectCard {...project} />)}
+		</div>
+	</div>
+</section>
+
+<style>
+	/* Figma: sección de 1576px con 120px arriba y abajo */
+	section {
+		padding-block: calc(120 * var(--u));
+		background: var(--bg-teal);
+	}
+
+	.list {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: calc(29 * var(--u));
+		margin-top: calc(58 * var(--u));
+	}
+</style>

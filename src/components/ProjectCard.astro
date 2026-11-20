@@ -1,0 +1,153 @@
+---
+/*
+ * Tarjeta de proyecto: una captura grande y dos chicas a un lado, y la ficha al otro.
+ * `reverse` pone la ficha a la izquierda. `stacked` apila etiqueta y valor.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+	title: string;
+	description: string;
+	facts: { label: string; value: string; stacked?: boolean }[];
+	images: { src: ImageMetadata; alt: string }[];
+	reverse?: boolean;
+}
+
+const { title, description, facts, images, reverse = false } = Astro.props;
+---
+
+<article class:list={['project', { reverse }]}>
+	<div class="media">
+		{images.map((image) => <Image src={image.src} alt={image.alt} quality="max" />)}
+	</div>
+
+	<div class="info">
+		<h3>{title}</h3>
+		<p class="description">{description}</p>
+		<dl>
+			{
+				facts.map((fact) => (
+					<div class:list={['fact', { stacked: fact.stacked }]}>
+						<dt>{fact.label}</dt>
+						<dd>{fact.value}</dd>
+					</div>
+				))
+			}
+		</dl>
+	</div>
+</article>
+
+<style>
+	/* Figma: 676px de imágenes + 468px de ficha */
+	.project {
+		display: grid;
+		grid-template-columns: minmax(0, 676fr) minmax(0, 468fr);
+		overflow: hidden;
+		border-radius: calc(18 * var(--u));
+		background: var(--bg-navy);
+	}
+
+	.project.reverse {
+		grid-template-columns: minmax(0, 468fr) minmax(0, 676fr);
+	}
+
+	.project.reverse .media {
+		order: 2;
+	}
+
+	/* Una captura de 676x381 y abajo dos de 337x190, separadas por 2px */
+	.media {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		align-content: start;
+		gap: calc(2 * var(--u));
+	}
+
+	.media :global(img) {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 337 / 190;
+		object-fit: cover;
+	}
+
+	.media :global(img:first-child) {
+		grid-column: 1 / -1;
+		aspect-ratio: 676 / 381;
+	}
+
+	.info {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		padding: calc(32 * var(--u)) calc(40 * var(--u));
+	}
+
+	h3 {
+		font-size: calc(32 * var(--u));
+		font-weight: 800;
+		line-height: calc(38 * var(--u));
+		text-transform: uppercase;
+	}
+
+	.description {
+		margin-block: calc(12 * var(--u)) calc(15 * var(--u));
+		font-size: calc(15.5 * var(--u));
+		line-height: 1.65; /* 25.5 / 15.5 */
+		color: var(--text);
+	}
+
+	dl {
+		border-top: 1px solid var(--line);
+	}
+
+	.fact {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: calc(16 * var(--u));
+		min-height: calc(47 * var(--u));
+		box-sizing: border-box;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.fact.stacked {
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		gap: calc(5 * var(--u));
+		min-height: calc(78 * var(--u));
+	}
+
+	dt {
+		flex: none;
+		font-size: calc(12 * var(--u));
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+
+	dd {
+		font-size: calc(14.35 * var(--u));
+		font-weight: 700;
+		text-align: right;
+	}
+
+	.stacked dd {
+		text-align: left;
+	}
+
+	/* ---- Pantallas más angostas ---- */
+	@media (max-width: 1180px) {
+		.project,
+		.project.reverse {
+			grid-template-columns: minmax(0, 1fr);
+		}
+
+		.project.reverse .media {
+			order: 0;
+		}
+	}
+</style>
