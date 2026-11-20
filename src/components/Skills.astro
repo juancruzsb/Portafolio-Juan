@@ -1,0 +1,80 @@
+---
+const skills = [
+	{ label: 'Frontend', value: 'HTML, CSS y JavaScript. Fui desarrollador frontend en PokeORT.' },
+	{ label: 'Videojuegos', value: 'Unity. Fui game developer en PokeORT 3D.' },
+	{ label: 'Trabajo en equipo', value: 'Mis dos proyectos fueron grupales, con roles repartidos.' },
+	{ label: 'Próximo paso', value: 'Ingeniería en Informática en la UBA.' },
+];
+---
+
+<section id="habilidades">
+	<div class="wrap">
+		<p class="eyebrow">Habilidades</p>
+		<h2 class="section-title">Con qué <span>trabajo</span></h2>
+
+		<dl>
+			{
+				skills.map((skill) => (
+					<div class="skill">
+						<dt>{skill.label}</dt>
+						<dd>{skill.value}</dd>
+					</div>
+				))
+			}
+		</dl>
+	</div>
+</section>
+
+<style>
+	/* Figma: sección de 641px con 120px arriba y abajo */
+	section {
+		padding-block: calc(120 * var(--u));
+		background: var(--bg-slate);
+	}
+
+	dl {
+		max-width: calc(900 * var(--u));
+		margin-top: calc(57 * var(--u));
+		border-top: 1px solid var(--line);
+	}
+
+	.skill {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: calc(24 * var(--u));
+		min-height: calc(60.3 * var(--u));
+		box-sizing: border-box;
+		border-bottom: 1px solid var(--line);
+	}
+
+	dt {
+		flex: none;
+		font-size: calc(12 * var(--u));
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+
+	dd {
+		font-size: calc(16.3 * var(--u));
+		font-weight: 700;
+		text-align: right;
+	}
+
+	/* ---- Pantallas más angostas ---- */
+	@media (max-width: 700px) {
+		.skill {
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: center;
+			gap: calc(6 * var(--u));
+			padding-block: calc(16 * var(--u));
+		}
+
+		dd {
+			text-align: left;
+		}
+	}
+</style>

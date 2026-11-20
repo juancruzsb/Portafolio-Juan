@@ -1,0 +1,153 @@
+---
+const email = 'sabiojuancruz2@gmail.com';
+
+const items = [
+	{ label: 'Email', value: email, href: `mailto:${email}`, copy: true },
+	{ label: 'Instagram', value: '@juancruz.sb', href: 'https://instagram.com/juancruz.sb' },
+	{ label: 'GitHub', value: 'github.com/juancruzsb', href: 'https://github.com/juancruzsb' },
+	{ label: 'X (Twitter)', value: '@juaancruzsb', href: 'https://x.com/juaancruzsb' },
+];
+---
+
+<section id="contacto">
+	<div class="wrap contact">
+		<div>
+			<p class="eyebrow">Contacto</p>
+			<h2 class="section-title">Mandame<br />un <span>mensaje</span></h2>
+			<p class="lead">Si querés hablar de programación, videojuegos o Racing, escribime.</p>
+		</div>
+
+		<ul class="items">
+			{
+				items.map((item) => (
+					<li>
+						<span class="label">{item.label}</span>
+						<a class="value" href={item.href}>
+							{item.value}
+						</a>
+						{item.copy && (
+							<button type="button" data-copy={item.value}>
+								Copiar
+							</button>
+						)}
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>
+
+<script>
+	// Botón "Copiar": copia el email y avisa en el mismo botón
+	document.querySelectorAll<HTMLButtonElement>('button[data-copy]').forEach((button) => {
+		button.addEventListener('click', async () => {
+			try {
+				await navigator.clipboard.writeText(button.dataset.copy ?? '');
+				button.textContent = 'Copiado';
+			} catch {
+				button.textContent = 'Error';
+			}
+			setTimeout(() => (button.textContent = 'Copiar'), 2000);
+		});
+	});
+</script>
+
+<style>
+	/* Figma: sección de 509px con 120px arriba y abajo */
+	section {
+		padding-block: calc(120 * var(--u));
+		background: var(--bg-navy);
+	}
+
+	.contact {
+		display: grid;
+		grid-template-columns: calc(500 * var(--u)) calc(536 * var(--u));
+		justify-content: space-between;
+		align-items: start;
+	}
+
+	.lead {
+		max-width: calc(490 * var(--u));
+		margin-top: calc(18 * var(--u));
+		font-size: calc(17 * var(--u));
+		line-height: 1.65; /* 28 / 17 */
+		color: var(--text);
+	}
+
+	.items {
+		border-top: 1px solid var(--line);
+	}
+
+	li {
+		display: grid;
+		grid-template-columns: calc(112 * var(--u)) minmax(0, 1fr) auto;
+		align-items: center;
+		min-height: calc(65 * var(--u));
+		box-sizing: border-box;
+		border-bottom: 1px solid var(--line);
+	}
+
+	li:first-child {
+		min-height: calc(73 * var(--u));
+	}
+
+	.label {
+		font-size: calc(12 * var(--u));
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+		color: var(--accent);
+	}
+
+	.value {
+		overflow-wrap: anywhere;
+		font-size: calc(17 * var(--u));
+		letter-spacing: -0.01em;
+		font-weight: 700;
+		color: var(--white);
+		text-decoration: none;
+	}
+
+	.value:hover {
+		text-decoration: underline;
+	}
+
+	button {
+		width: calc(73 * var(--u));
+		height: calc(36 * var(--u));
+		padding: 0;
+		border: 0;
+		border-radius: calc(10 * var(--u));
+		background: var(--accent);
+		color: var(--bg-navy);
+		font-family: inherit;
+		font-size: calc(13 * var(--u));
+		font-weight: 700;
+		cursor: pointer;
+	}
+
+	button:hover {
+		filter: brightness(1.12);
+	}
+
+	/* ---- Pantallas más angostas ---- */
+	@media (max-width: 1180px) {
+		.contact {
+			grid-template-columns: minmax(0, 1fr);
+			row-gap: calc(56 * var(--u));
+		}
+	}
+
+	@media (max-width: 700px) {
+		li,
+		li:first-child {
+			grid-template-columns: minmax(0, 1fr) auto;
+			row-gap: calc(4 * var(--u));
+			padding-block: calc(12 * var(--u));
+		}
+
+		.label {
+			grid-column: 1 / -1;
+		}
+	}
+</style>
